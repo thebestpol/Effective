@@ -30,7 +30,7 @@ public class PointsOfViewAdapter extends RecyclerView.Adapter<PointsOfViewAdapte
 
     @Override
     public PointsOfViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
+        View view = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
 
         return new PointsOfViewHolder(view);
     }
