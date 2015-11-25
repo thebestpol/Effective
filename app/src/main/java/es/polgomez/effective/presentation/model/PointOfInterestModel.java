@@ -1,6 +1,6 @@
 package es.polgomez.effective.presentation.model;
 
-public class PointOfViewModel {
+public class PointOfInterestModel {
 
     private String title;
 

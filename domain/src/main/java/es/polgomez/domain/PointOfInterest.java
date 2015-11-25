@@ -1,4 +1,4 @@
 package es.polgomez.domain;
 
-public class PointOfView {
+public class PointOfInterest {
 }

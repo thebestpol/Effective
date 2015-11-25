@@ -15,15 +15,15 @@ import java.util.Collection;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import es.polgomez.effective.R;
-import es.polgomez.effective.presentation.model.PointOfViewModel;
-import es.polgomez.effective.presentation.presenter.PointOfViewListPresenter;
-import es.polgomez.effective.presentation.view.PointOfViewListView;
-import es.polgomez.effective.presentation.view.adapter.PointsOfViewAdapter;
+import es.polgomez.effective.presentation.model.PointOfInterestModel;
+import es.polgomez.effective.presentation.presenter.PointOfInterestListPresenter;
+import es.polgomez.effective.presentation.view.PointOfInterestListView;
+import es.polgomez.effective.presentation.view.adapter.PointsOfInterestAdapter;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements PointOfViewListView {
+public class MainActivityFragment extends Fragment implements PointOfInterestListView {
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -31,9 +31,9 @@ public class MainActivityFragment extends Fragment implements PointOfViewListVie
     @Bind(R.id.progressView)
     View progressView;
 
-    private PointsOfViewAdapter pointsOfViewAdapter;
+    private PointsOfInterestAdapter pointsOfInterestAdapter;
 
-    PointOfViewListPresenter pointOfViewListPresenter;
+    PointOfInterestListPresenter pointOfInterestListPresenter;
 
     public MainActivityFragment() {
     }
@@ -52,28 +52,28 @@ public class MainActivityFragment extends Fragment implements PointOfViewListVie
     private void initUI() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        pointsOfViewAdapter = new PointsOfViewAdapter(LayoutInflater.from(getActivity()),
-                new ArrayList<PointOfViewModel>());
-        pointsOfViewAdapter.setOnPointOfViewClickListener(
-                new PointsOfViewAdapter.PointOfViewClickListener() {
+        pointsOfInterestAdapter = new PointsOfInterestAdapter(LayoutInflater.from(getActivity()),
+                new ArrayList<PointOfInterestModel>());
+        pointsOfInterestAdapter.setOnPointOfViewClickListener(
+                new PointsOfInterestAdapter.PointOfViewClickListener() {
                     @Override
-                    public void onPointOfViewClick(PointOfViewModel pointOfViewModel) {
-                        if (pointOfViewListPresenter != null && pointOfViewModel != null) {
-                            pointOfViewListPresenter.onPointOfViewClicked(pointOfViewModel);
+                    public void onPointOfViewClick(PointOfInterestModel pointOfInterestModel) {
+                        if (pointOfInterestListPresenter != null && pointOfInterestModel != null) {
+                            pointOfInterestListPresenter.onPointOfViewClicked(pointOfInterestModel);
                         }
                     }
                 });
-        recyclerView.setAdapter(pointsOfViewAdapter);
+        recyclerView.setAdapter(pointsOfInterestAdapter);
     }
 
 
     @Override
-    public void renderPointOfViewList(Collection<PointOfViewModel> pointOfViews) {
-        pointsOfViewAdapter.updatePointsOfView(pointOfViews);
+    public void renderPointOfViewList(Collection<PointOfInterestModel> pointOfViews) {
+        pointsOfInterestAdapter.updatePointsOfView(pointOfViews);
     }
 
     @Override
-    public void showPointOfView(PointOfViewModel pointOfView) {
+    public void showPointOfView(PointOfInterestModel pointOfView) {
         // TODO detail view
     }
 

@@ -11,17 +11,17 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import es.polgomez.effective.presentation.model.PointOfViewModel;
+import es.polgomez.effective.presentation.model.PointOfInterestModel;
 
-public class PointsOfViewAdapter extends RecyclerView.Adapter<PointsOfViewAdapter.PointsOfViewHolder> {
+public class PointsOfInterestAdapter extends RecyclerView.Adapter<PointsOfInterestAdapter.PointsOfViewHolder> {
 
     private final LayoutInflater layoutInflater;
-    private List<PointOfViewModel> pointsOfView;
+    private List<PointOfInterestModel> pointsOfView;
     private PointOfViewClickListener pointOfViewClickListener;
 
-    public PointsOfViewAdapter(LayoutInflater layoutInflater, Collection<PointOfViewModel> pointsOfView) {
+    public PointsOfInterestAdapter(LayoutInflater layoutInflater, Collection<PointOfInterestModel> pointsOfView) {
         this.layoutInflater = layoutInflater;
-        this.pointsOfView = (List<PointOfViewModel>) pointsOfView;
+        this.pointsOfView = (List<PointOfInterestModel>) pointsOfView;
     }
 
     public void setOnPointOfViewClickListener(PointOfViewClickListener pointOfViewClickListener) {
@@ -37,7 +37,7 @@ public class PointsOfViewAdapter extends RecyclerView.Adapter<PointsOfViewAdapte
 
     @Override
     public void onBindViewHolder(PointsOfViewHolder holder, int position) {
-        final PointOfViewModel pointOfView = pointsOfView.get(position);
+        final PointOfInterestModel pointOfView = pointsOfView.get(position);
         holder.text1.setText(pointOfView.getTitle());
         if (pointOfViewClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -54,9 +54,9 @@ public class PointsOfViewAdapter extends RecyclerView.Adapter<PointsOfViewAdapte
         return pointsOfView == null ? 0 : pointsOfView.size();
     }
 
-    public void updatePointsOfView(Collection<PointOfViewModel> pointsOfView) {
+    public void updatePointsOfView(Collection<PointOfInterestModel> pointsOfView) {
         if (pointsOfView != null) {
-            this.pointsOfView = (List<PointOfViewModel>) pointsOfView;
+            this.pointsOfView = (List<PointOfInterestModel>) pointsOfView;
             notifyDataSetChanged();
         }
     }
@@ -75,6 +75,6 @@ public class PointsOfViewAdapter extends RecyclerView.Adapter<PointsOfViewAdapte
 
     public interface PointOfViewClickListener {
 
-        void onPointOfViewClick(PointOfViewModel pointOfViewModel);
+        void onPointOfViewClick(PointOfInterestModel pointOfInterestModel);
     }
 }
