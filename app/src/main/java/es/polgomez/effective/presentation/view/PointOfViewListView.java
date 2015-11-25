@@ -7,7 +7,7 @@ import es.polgomez.effective.presentation.model.PointOfViewModel;
 /**
  * View that represents a list of PointOfViewModel
  */
-public interface PointOfViewListView {
+public interface PointOfViewListView extends ProgressView {
 
     void renderPointOfViewList(Collection<PointOfViewModel> pointOfViews);
 

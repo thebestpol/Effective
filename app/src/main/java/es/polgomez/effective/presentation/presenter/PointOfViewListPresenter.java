@@ -1,5 +1,6 @@
 package es.polgomez.effective.presentation.presenter;
 
+import es.polgomez.effective.presentation.model.PointOfViewModel;
 import es.polgomez.effective.presentation.view.PointOfViewListView;
 
 public class PointOfViewListPresenter implements Presenter {
@@ -8,6 +9,10 @@ public class PointOfViewListPresenter implements Presenter {
 
     public void setView(PointOfViewListView pointOfViewListView) {
         this.pointOfViewListView = pointOfViewListView;
+    }
+
+    public void onPointOfViewClicked(PointOfViewModel pointOfView) {
+        pointOfViewListView.showPointOfView(pointOfView);
     }
 
     @Override
