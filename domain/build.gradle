@@ -6,4 +6,7 @@ dependencies {
     compile 'javax.inject:javax.inject:1@jar'
     compile 'com.squareup.dagger:dagger-compiler:1.2.+'
     compile 'com.squareup.dagger:dagger:1.2.+'
+
+    compile 'io.reactivex:rxjava:1.0.16'
+    compile 'io.reactivex:rxandroid:1.0.1'
 }
