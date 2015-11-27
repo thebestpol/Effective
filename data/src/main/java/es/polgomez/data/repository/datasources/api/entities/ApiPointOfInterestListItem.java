@@ -1,4 +1,4 @@
-package es.polgomez.data.repository.datasources.api.entity;
+package es.polgomez.data.repository.datasources.api.entities;
 
 import java.io.Serializable;
 

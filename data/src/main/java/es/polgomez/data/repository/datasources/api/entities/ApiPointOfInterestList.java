@@ -1,6 +1,7 @@
-package es.polgomez.data.repository.datasources.api.entity;
+package es.polgomez.data.repository.datasources.api.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public class ApiPointOfInterestList implements Serializable {
 
-    private List<ApiPointOfInterestListItem> list;
+    private List<ApiPointOfInterestListItem> list = new ArrayList<>();
 
     public List<ApiPointOfInterestListItem> getList() {
         return list;

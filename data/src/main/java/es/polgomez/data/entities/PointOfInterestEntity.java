@@ -1,4 +1,4 @@
-package es.polgomez.data.entity;
+package es.polgomez.data.entities;
 
 public class PointOfInterestEntity {
 }

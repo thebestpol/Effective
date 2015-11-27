@@ -1,7 +1,7 @@
 package es.polgomez.data.repository.datasources.api;
 
-import es.polgomez.data.repository.datasources.api.entity.ApiPointOfInterest;
-import es.polgomez.data.repository.datasources.api.entity.ApiPointOfInterestList;
+import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterest;
+import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterestList;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
