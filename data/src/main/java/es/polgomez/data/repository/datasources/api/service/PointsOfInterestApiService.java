@@ -1,4 +1,4 @@
-package es.polgomez.data.repository.datasources.api;
+package es.polgomez.data.repository.datasources.api.service;
 
 import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterest;
 import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterestList;
@@ -10,6 +10,10 @@ import retrofit.http.Path;
  * Retrofit API declaration
  */
 public interface PointsOfInterestApiService {
+
+    // TODO continuar integrant retrofit
+
+    String API_SERVICE_ENDPOINT = "http://t21services.herokuapp.com";
 
     @GET("/points")
     Call<ApiPointOfInterestList> getPointsOfInterestList();

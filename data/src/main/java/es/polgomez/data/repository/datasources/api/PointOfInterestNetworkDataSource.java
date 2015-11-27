@@ -5,6 +5,7 @@ import java.io.IOException;
 import es.polgomez.data.repository.datasources.IPointOfInterestNetworkDataSource;
 import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterest;
 import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterestList;
+import es.polgomez.data.repository.datasources.api.service.PointsOfInterestApiService;
 
 /**
  * Implementation of network data source
