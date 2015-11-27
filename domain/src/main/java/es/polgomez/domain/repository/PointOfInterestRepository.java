@@ -9,8 +9,8 @@ import rx.Observable;
 
 public interface PointOfInterestRepository {
 
-    Observable<List<PointOfInterest>> getPointOfInterests();
+    Observable<List<PointOfInterest>> getPointsOfInterest();
 
-    Observable<PointOfInterestDetail> getPointOfInterest(int pointId);
+    Observable<PointOfInterestDetail> getPointsOfInterest(int pointId);
 
 }

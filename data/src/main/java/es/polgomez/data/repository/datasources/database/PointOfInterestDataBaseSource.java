@@ -9,7 +9,7 @@ import es.polgomez.domain.PointsOfInterest;
 public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSource {
 
     // TODO integrate realm and
-    
+
     @Override
     public PointsOfInterest obtainPointsOfInterest() throws Exception {
         return null;

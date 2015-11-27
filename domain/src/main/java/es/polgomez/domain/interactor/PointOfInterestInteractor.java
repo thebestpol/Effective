@@ -18,6 +18,6 @@ public class PointOfInterestInteractor extends Interactor {
 
     @Override
     Observable buildInteractorObservable() {
-        return pointOfInterestRepository.getPointOfInterests();
+        return pointOfInterestRepository.getPointsOfInterest();
     }
 }
