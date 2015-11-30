@@ -1,14 +1,10 @@
 package es.polgomez.data.repository;
 
-import java.util.List;
-
 import javax.inject.Singleton;
 
-import es.polgomez.data.repository.cache.item.ItemCachePolicy;
-import es.polgomez.data.repository.cache.list.ListCachePolicy;
+import es.polgomez.data.mapper.DataMapper;
 import es.polgomez.data.repository.datasources.api.PointOfInterestNetworkDataSource;
 import es.polgomez.data.repository.datasources.database.PointOfInterestDataBaseSource;
-import es.polgomez.domain.PointOfInterest;
 import es.polgomez.domain.PointOfInterestDetail;
 import es.polgomez.domain.PointsOfInterest;
 import es.polgomez.domain.repository.PointOfInterestRepository;
@@ -19,16 +15,9 @@ public class PointOfInterestDataRepository implements PointOfInterestRepository 
 
     private final PointOfInterestNetworkDataSource networkDataSource;
     private final PointOfInterestDataBaseSource dataBaseSource;
+    private final DataMapper dataMapper;
 
     // TODO keep working in this way, mapper and repository(factory)
-
-    private ItemCachePolicy<PointOfInterestDetail> pointOfInterestDetailCachePolicy =
-            new ItemCachePolicy<>();
-    private ItemCachePolicy<PointsOfInterest> pointsOfInterestDetailCachePolicy =
-            new ItemCachePolicy<>();
-    private ItemCachePolicy<PointOfInterest> pointOfInterestCachePolicy = new ItemCachePolicy<>();
-    private ListCachePolicy<PointOfInterest> pointsOfInterestListCachePolicy =
-            new ListCachePolicy<>(pointOfInterestCachePolicy);
 
     private DataPopulate dataPopulate;
 
@@ -38,37 +27,26 @@ public class PointOfInterestDataRepository implements PointOfInterestRepository 
         this.dataBaseSource = dataBaseSource;
 
         dataPopulate = new DataPopulate(dataBaseSource);
+        dataMapper = new DataMapper();
     }
 
     @Override
-    public Observable<List<PointOfInterest>> getPointsOfInterest() {
+    public Observable<PointsOfInterest> getPointsOfInterest() {
         PointsOfInterest pointsOfInterest = new PointsOfInterest();
-        boolean hasException = false;
-        String exceptionMessage = null;
         try {
+            // TODO this sould return and observable??
             pointsOfInterest = dataBaseSource.obtainPointsOfInterest();
-            if (!pointsOfInterestDetailCachePolicy.isValid(pointsOfInterest)
-                    && !pointsOfInterestListCachePolicy.isValid(pointsOfInterest.getPointsOfInterest())) {
-                dataPopulate.populatePointsOfInterest(pointsOfInterest);
-            }
         } catch (Exception e) {
-            // TODO handle exception
-            hasException = true;
-            exceptionMessage = e.getMessage();
+            try {
+                return networkDataSource.fetchPointsOfInterest()
+                        .map(dataMapper::transformPointsOfInterest)
+                        .doOnNext(dataPopulate::populatePointsOfInterest);
+            } catch (Exception exception) {
+                // TODO handle exception
+            }
         }
 
-        final boolean hasError = hasException;
-        final String errorMessage = exceptionMessage;
-        final PointsOfInterest resultPointsOfInterest = pointsOfInterest;
-
-        return Observable.create(subscriber -> {
-            if (hasError) {
-                subscriber.onError(new Exception(errorMessage));
-            } else {
-                subscriber.onNext(resultPointsOfInterest.getPointsOfInterest());
-                subscriber.onCompleted();
-            }
-        });
+        return Observable.just(pointsOfInterest);
     }
 
     @Override

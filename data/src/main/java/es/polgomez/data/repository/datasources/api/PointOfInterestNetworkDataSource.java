@@ -2,7 +2,6 @@ package es.polgomez.data.repository.datasources.api;
 
 import es.polgomez.data.entities.PointOfInterestDetailEntity;
 import es.polgomez.data.entities.PointsOfInterestEntity;
-import es.polgomez.data.repository.datasources.IPointOfInterestNetworkDataSource;
 import es.polgomez.data.repository.datasources.api.entities.mapper.ApiPointOfInterestDetailMapper;
 import es.polgomez.data.repository.datasources.api.entities.mapper.ApiPointsOfInterestMapper;
 import es.polgomez.data.repository.datasources.api.service.PointsOfInterestApiService;

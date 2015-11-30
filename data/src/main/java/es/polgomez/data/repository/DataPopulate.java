@@ -18,20 +18,24 @@ public class DataPopulate {
     }
 
     public void populatePointOfInterest(PointOfInterest pointOfInterest) {
-        try {
-            dataBaseSource.persisPointOfInterest(pointOfInterest);
-        } catch (Exception e) {
-            // TODO  handle exception
-            e.printStackTrace();
+        if (pointOfInterest != null) {
+            try {
+                dataBaseSource.persisPointOfInterest(pointOfInterest);
+            } catch (Exception e) {
+                // TODO  handle exception
+                e.printStackTrace();
+            }
         }
     }
 
     public void populatePointsOfInterest(PointsOfInterest pointsOfInterest) {
-        try {
-            dataBaseSource.persistPointsOfInterest(pointsOfInterest);
-        } catch (Exception e) {
-            // TODO handle exception
-            e.printStackTrace();
+        if (pointsOfInterest != null) {
+            try {
+                dataBaseSource.persistPointsOfInterest(pointsOfInterest);
+            } catch (Exception e) {
+                // TODO handle exception
+                e.printStackTrace();
+            }
         }
     }
 }

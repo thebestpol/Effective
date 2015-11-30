@@ -1,6 +1,10 @@
 package es.polgomez.data.repository.datasources.database;
 
+import es.polgomez.data.repository.cache.item.ItemCachePolicy;
+import es.polgomez.data.repository.cache.list.ListCachePolicy;
+import es.polgomez.data.repository.datasources.exceptions.InvalidCacheException;
 import es.polgomez.domain.PointOfInterest;
+import es.polgomez.domain.PointOfInterestDetail;
 import es.polgomez.domain.PointsOfInterest;
 
 /**
@@ -10,9 +14,22 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
 
     // TODO integrate realm and
 
+    private ItemCachePolicy<PointOfInterestDetail> pointOfInterestDetailCachePolicy =
+            new ItemCachePolicy<>();
+    private ItemCachePolicy<PointsOfInterest> pointsOfInterestDetailCachePolicy =
+            new ItemCachePolicy<>();
+    private ItemCachePolicy<PointOfInterest> pointOfInterestCachePolicy = new ItemCachePolicy<>();
+    private ListCachePolicy<PointOfInterest> pointsOfInterestListCachePolicy =
+            new ListCachePolicy<>(pointOfInterestCachePolicy);
+
     @Override
     public PointsOfInterest obtainPointsOfInterest() throws Exception {
-        return null;
+        PointsOfInterest pointsOfInterest = new PointsOfInterest();
+        if (pointsOfInterestDetailCachePolicy.isValid(pointsOfInterest)) {
+            return pointsOfInterest;
+        } else {
+            throw new InvalidCacheException();
+        }
     }
 
     @Override
@@ -26,8 +43,13 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
     }
 
     @Override
-    public PointOfInterest obtainPointOfInterest(int id) throws Exception {
-        return null;
+    public PointOfInterestDetail obtainPointOfInterest(int id) throws Exception {
+        PointOfInterestDetail pointOfInterestDetail = new PointOfInterestDetail();
+        if (pointOfInterestDetailCachePolicy.isValid(pointOfInterestDetail)) {
+            return pointOfInterestDetail;
+        } else {
+            throw new InvalidCacheException();
+        }
     }
 
     @Override

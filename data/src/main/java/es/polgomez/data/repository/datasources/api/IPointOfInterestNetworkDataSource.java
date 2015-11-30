@@ -1,4 +1,4 @@
-package es.polgomez.data.repository.datasources;
+package es.polgomez.data.repository.datasources.api;
 
 import es.polgomez.data.entities.PointOfInterestDetailEntity;
 import es.polgomez.data.entities.PointsOfInterestEntity;

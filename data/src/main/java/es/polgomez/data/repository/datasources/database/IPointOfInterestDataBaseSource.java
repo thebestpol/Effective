@@ -1,6 +1,7 @@
 package es.polgomez.data.repository.datasources.database;
 
 import es.polgomez.domain.PointOfInterest;
+import es.polgomez.domain.PointOfInterestDetail;
 import es.polgomez.domain.PointsOfInterest;
 
 /**
@@ -16,7 +17,7 @@ public interface IPointOfInterestDataBaseSource {
 
     void deletePointsOfInterest(PointsOfInterest pointsOfInterest) throws Exception;
 
-    PointOfInterest obtainPointOfInterest(int id) throws Exception;
+    PointOfInterestDetail obtainPointOfInterest(int id) throws Exception;
 
     void persisPointOfInterest(PointOfInterest pointOfInterest) throws Exception;
 

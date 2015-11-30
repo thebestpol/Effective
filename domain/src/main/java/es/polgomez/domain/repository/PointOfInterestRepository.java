@@ -1,15 +1,13 @@
 package es.polgomez.domain.repository;
 
 
-import java.util.List;
-
-import es.polgomez.domain.PointOfInterest;
 import es.polgomez.domain.PointOfInterestDetail;
+import es.polgomez.domain.PointsOfInterest;
 import rx.Observable;
 
 public interface PointOfInterestRepository {
 
-    Observable<List<PointOfInterest>> getPointsOfInterest();
+    Observable<PointsOfInterest> getPointsOfInterest();
 
     Observable<PointOfInterestDetail> getPointsOfInterest(int pointId);
 
