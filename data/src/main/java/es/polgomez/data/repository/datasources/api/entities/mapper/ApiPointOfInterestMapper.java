@@ -9,14 +9,19 @@ public class ApiPointOfInterestMapper implements Mapper<PointOfInterestEntity, A
     @Override
     public ApiPointOfInterestListItem modelToData(PointOfInterestEntity model) {
         ApiPointOfInterestListItem apiPointOfInterest = new ApiPointOfInterestListItem();
-        // TODO map
+        apiPointOfInterest.setId(model.getId());
+        apiPointOfInterest.setTitle(model.getTitle());
+        apiPointOfInterest.setGeocoordinates(null);
+
         return apiPointOfInterest;
     }
 
     @Override
     public PointOfInterestEntity dataToModel(ApiPointOfInterestListItem data) {
         PointOfInterestEntity pointOfInterestEntity = new PointOfInterestEntity();
-        // TODO map
+        pointOfInterestEntity.setId(data.getId());
+        pointOfInterestEntity.setTitle(data.getTitle());
+
         return pointOfInterestEntity;
     }
 }

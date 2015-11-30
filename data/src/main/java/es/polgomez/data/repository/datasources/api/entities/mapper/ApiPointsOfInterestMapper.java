@@ -13,7 +13,17 @@ public class ApiPointsOfInterestMapper implements Mapper<PointsOfInterestEntity,
 
     @Override
     public ApiPointOfInterestList modelToData(PointsOfInterestEntity model) {
+        ApiPointOfInterestMapper mapper = new ApiPointOfInterestMapper();
+
         ApiPointOfInterestList apiPointOfInterestList = new ApiPointOfInterestList();
+
+        List<ApiPointOfInterestListItem> apiPointsOfInterest = new ArrayList<>();
+        for (PointOfInterestEntity pointOfInterestEntity : model.getPointsOfInterest()) {
+            apiPointsOfInterest.add(mapper.modelToData(pointOfInterestEntity));
+        }
+
+        apiPointOfInterestList.setList(apiPointsOfInterest);
+
         return apiPointOfInterestList;
     }
 
@@ -27,6 +37,8 @@ public class ApiPointsOfInterestMapper implements Mapper<PointsOfInterestEntity,
         for (ApiPointOfInterestListItem apiPointOfInterestListItem : data.getList()) {
             pointsOfInterestList.add(mapper.dataToModel(apiPointOfInterestListItem));
         }
+
+        pointsOfInterest.setPointsOfInterest(pointsOfInterestList);
 
         return pointsOfInterest;
     }
