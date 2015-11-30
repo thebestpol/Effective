@@ -1,4 +1,4 @@
-package es.polgomez.domain.interactor;
+package es.polgomez.domain.interactors;
 
 import es.polgomez.domain.executor.MainThread;
 import es.polgomez.domain.executor.ThreadExecutor;
@@ -27,7 +27,7 @@ public abstract class Interactor {
                 .subscribe(interactorSubscriber);
     }
 
-    abstract Observable buildInteractorObservable();
+    public abstract Observable buildInteractorObservable();
 
     public void unsubscribe() {
         if (!subscription.isUnsubscribed()) {
