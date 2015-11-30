@@ -23,8 +23,8 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
             new ListCachePolicy<>(pointOfInterestCachePolicy);
 
     @Override
-    public PointsOfInterest obtainPointsOfInterest() throws Exception {
-        PointsOfInterest pointsOfInterest = new PointsOfInterest();
+    public PointsOfInterest obtainPointsOfInterest() throws InvalidCacheException {
+        PointsOfInterest pointsOfInterest = null;
         if (pointsOfInterestDetailCachePolicy.isValid(pointsOfInterest)) {
             return pointsOfInterest;
         } else {
@@ -43,7 +43,7 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
     }
 
     @Override
-    public PointOfInterestDetail obtainPointOfInterest(int id) throws Exception {
+    public PointOfInterestDetail obtainPointOfInterest(int id) throws InvalidCacheException {
         PointOfInterestDetail pointOfInterestDetail = new PointOfInterestDetail();
         if (pointOfInterestDetailCachePolicy.isValid(pointOfInterestDetail)) {
             return pointOfInterestDetail;

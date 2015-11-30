@@ -2,6 +2,7 @@ package es.polgomez.data.repository.datasources.api.service;
 
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
+import retrofit.RxJavaCallAdapterFactory;
 
 public class ServiceFactory {
 
@@ -15,6 +16,7 @@ public class ServiceFactory {
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         return retrofit.create(clazz);
