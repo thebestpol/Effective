@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import es.polgomez.effective.R;
 import es.polgomez.effective.presentation.model.PointOfInterestModel;
-import es.polgomez.effective.presentation.presenter.PointOfInterestListPresenter;
+import es.polgomez.effective.presentation.model.PointsOfInterestModel;
+import es.polgomez.effective.presentation.presenter.modules.main.PointOfInterestListPresenter;
 import es.polgomez.effective.presentation.view.PointOfInterestListView;
 import es.polgomez.effective.presentation.view.adapter.PointsOfInterestAdapter;
 
@@ -33,7 +33,7 @@ public class MainActivityFragment extends Fragment implements PointOfInterestLis
 
     private PointsOfInterestAdapter pointsOfInterestAdapter;
 
-    PointOfInterestListPresenter pointOfInterestListPresenter;
+    private PointOfInterestListPresenter pointOfInterestListPresenter;
 
     public MainActivityFragment() {
     }
@@ -59,7 +59,7 @@ public class MainActivityFragment extends Fragment implements PointOfInterestLis
                     @Override
                     public void onPointOfViewClick(PointOfInterestModel pointOfInterestModel) {
                         if (pointOfInterestListPresenter != null && pointOfInterestModel != null) {
-                            pointOfInterestListPresenter.onPointOfViewClicked(pointOfInterestModel);
+                            pointOfInterestListPresenter.onPointOfInterestClicked(pointOfInterestModel);
                         }
                     }
                 });
@@ -68,13 +68,13 @@ public class MainActivityFragment extends Fragment implements PointOfInterestLis
 
 
     @Override
-    public void renderPointOfViewList(Collection<PointOfInterestModel> pointOfViews) {
+    public void renderPointsOfInterest(PointsOfInterestModel pointOfViews) {
         pointsOfInterestAdapter.updatePointsOfView(pointOfViews);
     }
 
     @Override
-    public void showPointOfView(PointOfInterestModel pointOfView) {
-        // TODO detail view
+    public void showPointOfInterest(PointOfInterestModel pointOfView) {
+        // TODO detail view navigate to detail
     }
 
     @Override
@@ -90,5 +90,21 @@ public class MainActivityFragment extends Fragment implements PointOfInterestLis
     @Override
     public void showError(String errorMessage) {
         Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean isReady() {
+        return recyclerView != null;
+    }
+
+    @Override
+    public boolean isAlreadyLoaded() {
+        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+        return adapter != null && adapter.getItemCount() != 0;
+    }
+
+    @Override
+    public void showEmptyCase() {
+        // TODO show empty view
     }
 }

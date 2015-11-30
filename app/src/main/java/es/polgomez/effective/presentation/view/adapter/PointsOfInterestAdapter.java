@@ -12,16 +12,17 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import es.polgomez.effective.presentation.model.PointOfInterestModel;
+import es.polgomez.effective.presentation.model.PointsOfInterestModel;
 
 public class PointsOfInterestAdapter extends RecyclerView.Adapter<PointsOfInterestAdapter.PointsOfViewHolder> {
 
     private final LayoutInflater layoutInflater;
-    private List<PointOfInterestModel> pointsOfView;
+    private List<PointOfInterestModel> pointsOfInterest;
     private PointOfViewClickListener pointOfViewClickListener;
 
     public PointsOfInterestAdapter(LayoutInflater layoutInflater, Collection<PointOfInterestModel> pointsOfView) {
         this.layoutInflater = layoutInflater;
-        this.pointsOfView = (List<PointOfInterestModel>) pointsOfView;
+        this.pointsOfInterest = (List<PointOfInterestModel>) pointsOfView;
     }
 
     public void setOnPointOfViewClickListener(PointOfViewClickListener pointOfViewClickListener) {
@@ -37,7 +38,7 @@ public class PointsOfInterestAdapter extends RecyclerView.Adapter<PointsOfIntere
 
     @Override
     public void onBindViewHolder(PointsOfViewHolder holder, int position) {
-        final PointOfInterestModel pointOfView = pointsOfView.get(position);
+        final PointOfInterestModel pointOfView = pointsOfInterest.get(position);
         holder.text1.setText(pointOfView.getTitle());
         if (pointOfViewClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -51,12 +52,12 @@ public class PointsOfInterestAdapter extends RecyclerView.Adapter<PointsOfIntere
 
     @Override
     public int getItemCount() {
-        return pointsOfView == null ? 0 : pointsOfView.size();
+        return pointsOfInterest == null ? 0 : pointsOfInterest.size();
     }
 
-    public void updatePointsOfView(Collection<PointOfInterestModel> pointsOfView) {
-        if (pointsOfView != null) {
-            this.pointsOfView = (List<PointOfInterestModel>) pointsOfView;
+    public void updatePointsOfView(PointsOfInterestModel pointsOfInterest) {
+        if (pointsOfInterest != null) {
+            this.pointsOfInterest = pointsOfInterest.getPointsOfInterest();
             notifyDataSetChanged();
         }
     }

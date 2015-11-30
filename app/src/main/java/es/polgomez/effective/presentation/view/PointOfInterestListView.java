@@ -1,15 +1,14 @@
 package es.polgomez.effective.presentation.view;
 
-import java.util.Collection;
-
 import es.polgomez.effective.presentation.model.PointOfInterestModel;
+import es.polgomez.effective.presentation.model.PointsOfInterestModel;
 
 /**
  * View that represents a list of PointOfInterestModel
  */
 public interface PointOfInterestListView extends ProgressView {
 
-    void renderPointOfViewList(Collection<PointOfInterestModel> pointOfViews);
+    void renderPointsOfInterest(PointsOfInterestModel pointOfViews);
 
-    void showPointOfView(PointOfInterestModel pointOfView);
+    void showPointOfInterest(PointOfInterestModel pointOfView);
 }
