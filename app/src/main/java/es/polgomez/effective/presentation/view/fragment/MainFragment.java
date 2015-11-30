@@ -23,7 +23,7 @@ import es.polgomez.effective.presentation.view.adapter.PointsOfInterestAdapter;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements PointOfInterestListView {
+public class MainFragment extends Fragment implements PointOfInterestListView {
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -35,7 +35,7 @@ public class MainActivityFragment extends Fragment implements PointOfInterestLis
 
     private PointOfInterestListPresenter pointOfInterestListPresenter;
 
-    public MainActivityFragment() {
+    public MainFragment() {
     }
 
     @Override
@@ -94,7 +94,7 @@ public class MainActivityFragment extends Fragment implements PointOfInterestLis
 
     @Override
     public boolean isReady() {
-        return recyclerView != null;
+        return isAdded();
     }
 
     @Override
