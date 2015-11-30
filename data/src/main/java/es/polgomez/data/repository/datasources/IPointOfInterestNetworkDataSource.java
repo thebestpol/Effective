@@ -1,7 +1,8 @@
 package es.polgomez.data.repository.datasources;
 
-import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterest;
-import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterestList;
+import es.polgomez.data.entities.PointOfInterestDetailEntity;
+import es.polgomez.data.entities.PointsOfInterestEntity;
+import rx.Observable;
 
 /**
  * Network data source
@@ -10,8 +11,8 @@ public interface IPointOfInterestNetworkDataSource {
 
     // TODO custom exceptions
 
-    ApiPointOfInterestList fetchPointsOfInterest() throws Exception;
+    Observable<PointsOfInterestEntity> fetchPointsOfInterest() throws Exception;
 
-    ApiPointOfInterest fetchPointOfInterestDetail(int id) throws Exception;
+    Observable<PointOfInterestDetailEntity> fetchPointOfInterestDetail(int id) throws Exception;
 
 }

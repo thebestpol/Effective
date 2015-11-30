@@ -1,43 +1,41 @@
 package es.polgomez.data.repository.datasources.api;
 
-import java.io.IOException;
-
+import es.polgomez.data.entities.PointOfInterestDetailEntity;
+import es.polgomez.data.entities.PointsOfInterestEntity;
 import es.polgomez.data.repository.datasources.IPointOfInterestNetworkDataSource;
-import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterest;
-import es.polgomez.data.repository.datasources.api.entities.ApiPointOfInterestList;
+import es.polgomez.data.repository.datasources.api.entities.mapper.ApiPointOfInterestDetailMapper;
+import es.polgomez.data.repository.datasources.api.entities.mapper.ApiPointsOfInterestMapper;
 import es.polgomez.data.repository.datasources.api.service.PointsOfInterestApiService;
+import rx.Observable;
 
 /**
  * Implementation of network data source
  */
 public class PointOfInterestNetworkDataSource implements IPointOfInterestNetworkDataSource {
 
-    private PointsOfInterestApiService apiService;
+    private final PointsOfInterestApiService apiService;
+
+    private final ApiPointsOfInterestMapper apiPointsOfInterestMapper;
+    private final ApiPointOfInterestDetailMapper apiPointOfInterestDetailMapper;
 
     public PointOfInterestNetworkDataSource(PointsOfInterestApiService apiService) {
         this.apiService = apiService;
+
+        this.apiPointsOfInterestMapper = new ApiPointsOfInterestMapper();
+        this.apiPointOfInterestDetailMapper = new ApiPointOfInterestDetailMapper();
     }
 
     @Override
-    public ApiPointOfInterestList fetchPointsOfInterest() throws Exception{
-        try {
-            ApiPointOfInterestList pointsOfInterest = apiService.getPointsOfInterestList()
-                    .execute().body();
-
-            return pointsOfInterest;
-        } catch (IOException e) {
-            throw new Exception("Network error");
-        }
+    public Observable<PointsOfInterestEntity> fetchPointsOfInterest() throws Exception {
+        return apiService.getApiPointsOfInterestList().map(apiPointOfInterestList ->
+            apiPointsOfInterestMapper.dataToModel(apiPointOfInterestList)
+        );
     }
 
     @Override
-    public ApiPointOfInterest fetchPointOfInterestDetail(int id) throws Exception {
-        try {
-            ApiPointOfInterest pointOfInterest = apiService.getPointOfInterest(id).execute().body();
-
-            return pointOfInterest;
-        } catch (IOException e) {
-            throw new Exception("Network error");
-        }
+    public Observable<PointOfInterestDetailEntity> fetchPointOfInterestDetail(int id) throws Exception {
+        return apiService.getApiPointOfInterest(id).map(apiPointOfInterest ->
+            apiPointOfInterestDetailMapper.dataToModel(apiPointOfInterest)
+        );
     }
 }

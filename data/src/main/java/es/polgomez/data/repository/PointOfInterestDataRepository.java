@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Singleton;
 
-import es.polgomez.data.mapper.DataMapper;
 import es.polgomez.data.repository.cache.item.ItemCachePolicy;
 import es.polgomez.data.repository.cache.list.ListCachePolicy;
 import es.polgomez.data.repository.datasources.api.PointOfInterestNetworkDataSource;
@@ -33,15 +32,12 @@ public class PointOfInterestDataRepository implements PointOfInterestRepository 
 
     private DataPopulate dataPopulate;
 
-    private final DataMapper dataMapper;
-
     public PointOfInterestDataRepository(PointOfInterestNetworkDataSource networkDataSource,
                                          PointOfInterestDataBaseSource dataBaseSource) {
         this.networkDataSource = networkDataSource;
         this.dataBaseSource = dataBaseSource;
 
         dataPopulate = new DataPopulate(dataBaseSource);
-        dataMapper = new DataMapper();
     }
 
     @Override
@@ -53,7 +49,6 @@ public class PointOfInterestDataRepository implements PointOfInterestRepository 
             pointsOfInterest = dataBaseSource.obtainPointsOfInterest();
             if (!pointsOfInterestDetailCachePolicy.isValid(pointsOfInterest)
                     && !pointsOfInterestListCachePolicy.isValid(pointsOfInterest.getPointsOfInterest())) {
-                pointsOfInterest = dataMapper.transform(networkDataSource.fetchPointsOfInterest());
                 dataPopulate.populatePointsOfInterest(pointsOfInterest);
             }
         } catch (Exception e) {
