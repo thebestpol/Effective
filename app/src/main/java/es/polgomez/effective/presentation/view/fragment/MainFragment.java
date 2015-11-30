@@ -54,6 +54,7 @@ public class MainFragment extends Fragment implements PointOfInterestListView {
     private void init() {
         GetPointsOfInterest getPointsOfInterest = EffectiveApplication.getInstance().getGetPointsOfInterest();
         pointOfInterestListPresenter = new PointOfInterestListPresenter(getPointsOfInterest);
+        pointOfInterestListPresenter.setView(this);
         pointOfInterestListPresenter.initialize();
     }
 

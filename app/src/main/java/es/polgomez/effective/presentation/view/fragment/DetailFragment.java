@@ -60,6 +60,7 @@ public class DetailFragment extends Fragment implements PointOfInterestDetailVie
                 .getGetPointOfInterestDetail(pointOfInterestId);
 
         pointOfInterestDetaitPresenter = new PointOfInterestDetailPresenter(getPointOfInterestDetail);
+        pointOfInterestDetaitPresenter.setView(this);
         pointOfInterestDetaitPresenter.initialize();
     }
 

@@ -1,7 +1,5 @@
 package es.polgomez.data.repository;
 
-import javax.inject.Singleton;
-
 import es.polgomez.data.mapper.DataMapper;
 import es.polgomez.data.repository.datasources.api.PointOfInterestNetworkDataSource;
 import es.polgomez.data.repository.datasources.database.PointOfInterestDataBaseSource;
@@ -10,7 +8,6 @@ import es.polgomez.domain.PointsOfInterest;
 import es.polgomez.domain.repository.PointOfInterestRepository;
 import rx.Observable;
 
-@Singleton
 public class PointOfInterestDataRepository implements PointOfInterestRepository {
 
     private final PointOfInterestNetworkDataSource networkDataSource;
