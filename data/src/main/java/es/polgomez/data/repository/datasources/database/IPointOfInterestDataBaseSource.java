@@ -22,4 +22,6 @@ public interface IPointOfInterestDataBaseSource {
     void persisPointOfInterest(PointOfInterest pointOfInterest) throws Exception;
 
     void deletePointOfInterest(PointOfInterest pointOfInterest) throws Exception;
+
+    void persistPointOfInterestDetail(PointOfInterestDetail pointOfInterestDetail) throws Exception;
 }

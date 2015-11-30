@@ -49,7 +49,19 @@ public class PointOfInterestDataRepository implements PointOfInterestRepository 
 
     @Override
     public Observable<PointOfInterestDetail> getPointsOfInterest(int pointId) {
-        return null;
+        PointOfInterestDetail pointOfInterestDetail = new PointOfInterestDetail();
+        try {
+            pointOfInterestDetail = dataBaseSource.obtainPointOfInterest(pointId);
+        } catch (InvalidCacheException e) {
+            try {
+                return networkDataSource.fetchPointOfInterestDetail(pointId)
+                        .map(dataMapper::transformPointOfInterestDetail)
+                        .doOnNext(dataPopulate::populatePointOfInterestDetail);
+            } catch (Exception exception) {
+                // TODO
+            }
+        }
+        return Observable.just(pointOfInterestDetail);
     }
 
 }

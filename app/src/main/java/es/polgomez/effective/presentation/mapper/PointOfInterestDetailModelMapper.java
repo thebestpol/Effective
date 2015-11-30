@@ -9,13 +9,20 @@ public class PointOfInterestDetailModelMapper implements Mapper<PointOfInterestD
     @Override
     public PointOfInterestDetail modelToData(PointOfInterestDetailModel model) {
         PointOfInterestDetail pointOfInterestDetail = new PointOfInterestDetail();
-
+        pointOfInterestDetail.setId(Integer.valueOf(model.getId()));
+        pointOfInterestDetail.setTitle(model.getTitle());
+        pointOfInterestDetail.setAddress(model.getAddress());
+        pointOfInterestDetail.setDescription(model.getDescription());
         return pointOfInterestDetail;
     }
 
     @Override
     public PointOfInterestDetailModel dataToModel(PointOfInterestDetail data) {
         PointOfInterestDetailModel pointOfInterestDetailModel = new PointOfInterestDetailModel();
+        pointOfInterestDetailModel.setId(Integer.toString(data.getId()));
+        pointOfInterestDetailModel.setDescription(data.getDescription());
+        pointOfInterestDetailModel.setTitle(data.getTitle());
+        pointOfInterestDetailModel.setAddress(data.getAddress());
 
         return pointOfInterestDetailModel;
     }

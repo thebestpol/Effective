@@ -2,6 +2,7 @@ package es.polgomez.data.repository;
 
 import es.polgomez.data.repository.datasources.database.IPointOfInterestDataBaseSource;
 import es.polgomez.domain.PointOfInterest;
+import es.polgomez.domain.PointOfInterestDetail;
 import es.polgomez.domain.PointsOfInterest;
 
 /**
@@ -34,6 +35,17 @@ public class DataPopulate {
                 dataBaseSource.persistPointsOfInterest(pointsOfInterest);
             } catch (Exception e) {
                 // TODO handle exception
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void populatePointOfInterestDetail(PointOfInterestDetail pointOfInterestDetail) {
+        if (pointOfInterestDetail != null) {
+            try {
+                dataBaseSource.persistPointOfInterestDetail(pointOfInterestDetail);
+            } catch (Exception e) {
+                // TODO
                 e.printStackTrace();
             }
         }
