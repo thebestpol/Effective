@@ -14,7 +14,7 @@ public class GetPointOfInterestDetail extends Interactor {
     private final int pointOfInterestId;
     private final PointOfInterestRepository pointOfInterestRepository;
 
-    protected GetPointOfInterestDetail(int pointOfInterestId,
+    public GetPointOfInterestDetail(int pointOfInterestId,
                                        PointOfInterestRepository pointOfInterestRepository,
                                        ThreadExecutor threadExecutor, MainThread mainThread) {
         super(threadExecutor, mainThread);

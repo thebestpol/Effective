@@ -13,7 +13,9 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import es.polgomez.domain.interactors.pointofinterest.GetPointsOfInterest;
 import es.polgomez.effective.R;
+import es.polgomez.effective.presentation.EffectiveApplication;
 import es.polgomez.effective.presentation.model.PointOfInterestModel;
 import es.polgomez.effective.presentation.model.PointsOfInterestModel;
 import es.polgomez.effective.presentation.presenter.modules.main.PointOfInterestListPresenter;
@@ -35,18 +37,22 @@ public class MainFragment extends Fragment implements PointOfInterestListView {
 
     private PointOfInterestListPresenter pointOfInterestListPresenter;
 
-    public MainFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         ButterKnife.bind(this, view);
+        init();
         initUI();
 
         return view;
+    }
+
+    private void init() {
+        GetPointsOfInterest getPointsOfInterest = EffectiveApplication.getInstance().getGetPointsOfInterest();
+        pointOfInterestListPresenter = new PointOfInterestListPresenter(getPointsOfInterest);
+        pointOfInterestListPresenter.initialize();
     }
 
     private void initUI() {
@@ -66,6 +72,19 @@ public class MainFragment extends Fragment implements PointOfInterestListView {
         recyclerView.setAdapter(pointsOfInterestAdapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        pointOfInterestListPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        pointOfInterestListPresenter.pause();
+    }
 
     @Override
     public void renderPointsOfInterest(PointsOfInterestModel pointOfViews) {

@@ -9,7 +9,9 @@ import es.polgomez.effective.presentation.view.PointOfInterestListView;
 import rx.Subscriber;
 
 /**
- * Presenter created to show a list of points of interest
+ * Presenter created to show a list of points of interest.
+ *
+ * This class is attached to the Fragment lifecycle
  */
 public class PointOfInterestListPresenter extends Presenter<PointOfInterestListView> {
 

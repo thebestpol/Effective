@@ -11,8 +11,11 @@ import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import es.polgomez.domain.interactors.pointofinterest.GetPointOfInterestDetail;
 import es.polgomez.effective.R;
+import es.polgomez.effective.presentation.EffectiveApplication;
 import es.polgomez.effective.presentation.model.PointOfInterestDetailModel;
+import es.polgomez.effective.presentation.presenter.modules.detail.PointOfInterestDetailPresenter;
 import es.polgomez.effective.presentation.view.PointOfInterestDetailView;
 
 public class DetailFragment extends Fragment implements PointOfInterestDetailView {
@@ -27,6 +30,8 @@ public class DetailFragment extends Fragment implements PointOfInterestDetailVie
 
     @Bind(R.id.progressView)
     View progressView;
+
+    private PointOfInterestDetailPresenter pointOfInterestDetaitPresenter;
 
     public static DetailFragment newInstance(int pointOfInterestId) {
         Bundle args = new Bundle();
@@ -44,8 +49,32 @@ public class DetailFragment extends Fragment implements PointOfInterestDetailVie
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
 
         ButterKnife.bind(this, view);
+        init();
 
         return view;
+    }
+
+    private void init() {
+        int pointOfInterestId = getArguments().getInt(ARGUMENT_KEY_POI_ID);
+        GetPointOfInterestDetail getPointOfInterestDetail = EffectiveApplication.getInstance()
+                .getGetPointOfInterestDetail(pointOfInterestId);
+
+        pointOfInterestDetaitPresenter = new PointOfInterestDetailPresenter(getPointOfInterestDetail);
+        pointOfInterestDetaitPresenter.initialize();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        pointOfInterestDetaitPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        pointOfInterestDetaitPresenter.pause();
     }
 
     @Override
