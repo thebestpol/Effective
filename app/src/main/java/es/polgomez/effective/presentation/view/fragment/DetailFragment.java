@@ -78,6 +78,20 @@ public class DetailFragment extends Fragment implements PointOfInterestDetailVie
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        pointOfInterestDetaitPresenter.destroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        ButterKnife.unbind(this);
+    }
+
+    @Override
     public void renderPointOfInterest(PointOfInterestDetailModel pointOfInterestDetailModel) {
         topText.setText(pointOfInterestDetailModel.getTitle());
         middleText.setText(pointOfInterestDetailModel.getAddress());

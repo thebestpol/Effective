@@ -64,4 +64,9 @@ public class PointOfInterestDetailPresenter extends Presenter<PointOfInterestDet
     public void pause() {
 
     }
+
+    @Override
+    public void destroy() {
+        getPointOfInterestDetail.unsubscribe();
+    }
 }

@@ -12,6 +12,7 @@ import es.polgomez.domain.executor.ThreadExecutor;
 import es.polgomez.domain.interactors.pointofinterest.GetPointOfInterestDetail;
 import es.polgomez.domain.interactors.pointofinterest.GetPointsOfInterest;
 import es.polgomez.domain.repository.PointOfInterestRepository;
+import es.polgomez.effective.presentation.navigation.Navigator;
 
 public class EffectiveApplication extends Application {
 
@@ -21,6 +22,8 @@ public class EffectiveApplication extends Application {
     private MainThread mainThread;
 
     private GetPointsOfInterest getPointsOfInterest;
+
+    private Navigator navigator;
 
     private static EffectiveApplication instance;
 
@@ -46,6 +49,8 @@ public class EffectiveApplication extends Application {
 
         getPointsOfInterest = new GetPointsOfInterest(pointOfInterestRepository,
                 threadExecutor, mainThread);
+
+        navigator = new Navigator();
     }
 
     public PointOfInterestRepository getPointOfInterestRepository() {
@@ -67,5 +72,9 @@ public class EffectiveApplication extends Application {
 
     public GetPointsOfInterest getGetPointsOfInterest() {
         return getPointsOfInterest;
+    }
+
+    public Navigator getNavigator() {
+        return navigator;
     }
 }

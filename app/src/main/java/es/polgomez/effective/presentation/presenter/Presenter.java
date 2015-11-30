@@ -23,4 +23,6 @@ public abstract class Presenter<V> {
 
     public abstract void pause();
 
+    public abstract void destroy();
+
 }

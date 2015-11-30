@@ -2,6 +2,8 @@ package es.polgomez.effective.presentation.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -87,13 +89,33 @@ public class MainFragment extends Fragment implements PointOfInterestListView {
     }
 
     @Override
-    public void renderPointsOfInterest(PointsOfInterestModel pointOfViews) {
-        pointsOfInterestAdapter.updatePointsOfView(pointOfViews);
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        ButterKnife.unbind(this);
     }
 
     @Override
-    public void showPointOfInterest(PointOfInterestModel pointOfView) {
-        // TODO detail view navigate to detail
+    public void onDestroy() {
+        super.onDestroy();
+
+        pointOfInterestListPresenter.destroy();
+    }
+
+    @Override
+    public void renderPointsOfInterest(PointsOfInterestModel pointsOfInterestModel) {
+        pointsOfInterestAdapter.updatePointsOfView(pointsOfInterestModel);
+    }
+
+    @Override
+    public void showPointOfInterest(PointOfInterestModel pointOfInterestModel) {
+        FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+        if (supportFragmentManager != null) {
+            FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+            EffectiveApplication.getInstance().getNavigator().navigateToPointOfInterestDetail(
+                    fragmentTransaction, pointOfInterestModel.getId(), R.id.container
+            );
+        }
     }
 
     @Override

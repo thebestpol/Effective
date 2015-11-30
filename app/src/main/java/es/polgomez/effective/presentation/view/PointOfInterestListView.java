@@ -8,7 +8,7 @@ import es.polgomez.effective.presentation.model.PointsOfInterestModel;
  */
 public interface PointOfInterestListView extends ProgressView {
 
-    void renderPointsOfInterest(PointsOfInterestModel pointOfViews);
+    void renderPointsOfInterest(PointsOfInterestModel pointsOfInterestModel);
 
-    void showPointOfInterest(PointOfInterestModel pointOfView);
+    void showPointOfInterest(PointOfInterestModel pointOfInterestModel);
 }
