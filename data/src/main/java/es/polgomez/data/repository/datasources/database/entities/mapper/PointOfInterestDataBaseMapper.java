@@ -7,11 +7,19 @@ import es.polgomez.data.repository.datasources.database.entities.PointOfInterest
 public class PointOfInterestDataBaseMapper implements Mapper<PointOfInterestEntity, PointOfInterestDataBaseEntity> {
     @Override
     public PointOfInterestDataBaseEntity modelToData(PointOfInterestEntity model) {
-        return null;
+        PointOfInterestDataBaseEntity pointOfInterestDataBaseEntity = new PointOfInterestDataBaseEntity();
+        pointOfInterestDataBaseEntity.setId(Integer.valueOf(model.getId()));
+        pointOfInterestDataBaseEntity.setTitle(model.getTitle());
+
+        return pointOfInterestDataBaseEntity;
     }
 
     @Override
     public PointOfInterestEntity dataToModel(PointOfInterestDataBaseEntity data) {
-        return null;
+        PointOfInterestEntity pointOfInterestEntity = new PointOfInterestEntity();
+        pointOfInterestEntity.setId(Integer.toString(data.getId()));
+        pointOfInterestEntity.setTitle(data.getTitle());
+
+        return pointOfInterestEntity;
     }
 }
