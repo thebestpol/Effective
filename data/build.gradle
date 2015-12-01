@@ -2,6 +2,7 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.2.3'
@@ -26,16 +27,19 @@ android {
     }
 }
 
-
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile project(':domain')
 
+    // Retrofit
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
 
+    // RxJava
     compile 'io.reactivex:rxjava:1.0.16'
+
+    // Realm
+    compile 'io.realm:realm-android:0.85.+'
 }
