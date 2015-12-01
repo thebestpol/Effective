@@ -22,6 +22,11 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
     private ListCachePolicy<PointOfInterest> pointsOfInterestListCachePolicy =
             new ListCachePolicy<>(pointOfInterestCachePolicy);
 
+    public PointOfInterestDataBaseSource() {
+
+    }
+
+
     @Override
     public PointsOfInterest obtainPointsOfInterest() throws InvalidCacheException {
         // TODO
