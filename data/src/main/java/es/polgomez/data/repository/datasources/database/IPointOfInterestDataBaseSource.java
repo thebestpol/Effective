@@ -1,27 +1,27 @@
 package es.polgomez.data.repository.datasources.database;
 
+import es.polgomez.data.repository.datasources.exceptions.InvalidCacheException;
 import es.polgomez.domain.PointOfInterest;
 import es.polgomez.domain.PointOfInterestDetail;
 import es.polgomez.domain.PointsOfInterest;
+import rx.Observable;
 
 /**
  * An interface of database source
  */
 public interface IPointOfInterestDataBaseSource {
 
-    // TODO custom exceptions?
+    Observable<PointsOfInterest> obtainPointsOfInterest() throws InvalidCacheException;
 
-    PointsOfInterest obtainPointsOfInterest() throws Exception;
+    void persistPointsOfInterest(PointsOfInterest pointsOfInterest);
 
-    void persistPointsOfInterest(PointsOfInterest pointsOfInterest) throws Exception;
+    void deletePointsOfInterest(PointsOfInterest pointsOfInterest);
 
-    void deletePointsOfInterest(PointsOfInterest pointsOfInterest) throws Exception;
+    Observable<PointOfInterestDetail> obtainPointOfInterest(int pointOfInterestId) throws InvalidCacheException;
 
-    PointOfInterestDetail obtainPointOfInterest(int id) throws Exception;
+    void persisPointOfInterest(PointOfInterest pointOfInterest);
 
-    void persisPointOfInterest(PointOfInterest pointOfInterest) throws Exception;
+    void deletePointOfInterest(PointOfInterest pointOfInterest);
 
-    void deletePointOfInterest(PointOfInterest pointOfInterest) throws Exception;
-
-    void persistPointOfInterestDetail(PointOfInterestDetail pointOfInterestDetail) throws Exception;
+    void persistPointOfInterestDetail(PointOfInterestDetail pointOfInterestDetail);
 }
