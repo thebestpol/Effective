@@ -4,7 +4,6 @@ import es.polgomez.domain.executor.MainThread;
 import es.polgomez.domain.executor.ThreadExecutor;
 import es.polgomez.domain.interactors.Interactor;
 import es.polgomez.domain.repository.PointOfInterestRepository;
-
 import rx.Observable;
 
 /**

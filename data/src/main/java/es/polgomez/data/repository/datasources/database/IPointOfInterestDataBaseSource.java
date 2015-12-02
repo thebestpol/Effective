@@ -1,12 +1,7 @@
 package es.polgomez.data.repository.datasources.database;
 
 import es.polgomez.data.entities.PointOfInterestDetailEntity;
-import es.polgomez.data.entities.PointOfInterestEntity;
 import es.polgomez.data.entities.PointsOfInterestEntity;
-import es.polgomez.data.repository.datasources.exceptions.InvalidCacheException;
-import es.polgomez.domain.PointOfInterest;
-import es.polgomez.domain.PointOfInterestDetail;
-import es.polgomez.domain.PointsOfInterest;
 import rx.Observable;
 
 /**

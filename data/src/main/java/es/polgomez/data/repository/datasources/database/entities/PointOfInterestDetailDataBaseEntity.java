@@ -2,7 +2,6 @@ package es.polgomez.data.repository.datasources.database.entities;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
 
 public class PointOfInterestDetailDataBaseEntity extends RealmObject {
 

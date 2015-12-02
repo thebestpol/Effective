@@ -1,24 +1,16 @@
 package es.polgomez.data.repository.datasources.database;
 
 import es.polgomez.data.entities.PointOfInterestDetailEntity;
-import es.polgomez.data.entities.PointOfInterestEntity;
 import es.polgomez.data.entities.PointsOfInterestEntity;
 import es.polgomez.data.repository.cache.item.ItemCachePolicy;
-import es.polgomez.data.repository.cache.list.ListCachePolicy;
-import es.polgomez.data.repository.datasources.database.entities.PointOfInterestDataBaseEntity;
 import es.polgomez.data.repository.datasources.database.entities.PointOfInterestDetailDataBaseEntity;
 import es.polgomez.data.repository.datasources.database.entities.PointsOfInterestDataBaseEntity;
 import es.polgomez.data.repository.datasources.database.entities.mapper.PointOfInterestDetailDataBaseMapper;
 import es.polgomez.data.repository.datasources.database.entities.mapper.PointsOfInterestDataBaseMapper;
 import es.polgomez.data.repository.datasources.database.observable.RealmObservable;
-import es.polgomez.data.repository.datasources.exceptions.InvalidCacheException;
-import es.polgomez.domain.PointOfInterest;
-import es.polgomez.domain.PointOfInterestDetail;
-import es.polgomez.domain.PointsOfInterest;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * Implementation of point of interest database source
