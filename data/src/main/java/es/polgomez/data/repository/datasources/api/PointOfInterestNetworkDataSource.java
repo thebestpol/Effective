@@ -27,14 +27,14 @@ public class PointOfInterestNetworkDataSource implements IPointOfInterestNetwork
     @Override
     public Observable<PointsOfInterestEntity> fetchPointsOfInterest() {
         return apiService.getApiPointsOfInterestList().map(apiPointOfInterestList ->
-            apiPointsOfInterestMapper.dataToModel(apiPointOfInterestList)
+                        apiPointsOfInterestMapper.dataToModel(apiPointOfInterestList)
         );
     }
 
     @Override
     public Observable<PointOfInterestDetailEntity> fetchPointOfInterestDetail(int id) {
         return apiService.getApiPointOfInterest(id).map(apiPointOfInterest ->
-            apiPointOfInterestDetailMapper.dataToModel(apiPointOfInterest)
+                        apiPointOfInterestDetailMapper.dataToModel(apiPointOfInterest)
         );
     }
 }

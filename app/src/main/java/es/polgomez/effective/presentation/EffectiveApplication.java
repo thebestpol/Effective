@@ -44,9 +44,10 @@ public class EffectiveApplication extends Application {
         PointsOfInterestApiService apiService = ServiceFactory.createRetrofitService(
                 PointsOfInterestApiService.class, PointsOfInterestApiService.API_SERVICE_ENDPOINT);
 
+        // TODO clear context from repository
         pointOfInterestRepository = new PointOfInterestDataRepository(
                 new PointOfInterestNetworkDataSource(apiService),
-                new PointOfInterestDataBaseSource(Realm.getInstance(this)));
+                new PointOfInterestDataBaseSource(this));
 
         getPointsOfInterest = new GetPointsOfInterest(pointOfInterestRepository,
                 threadExecutor, mainThread);

@@ -1,5 +1,7 @@
 package es.polgomez.data.repository.datasources.database.observable;
 
+import android.content.Context;
+
 import io.realm.Realm;
 import io.realm.RealmObject;
 import rx.Observable;
@@ -10,11 +12,11 @@ public class RealmObservable {
     private RealmObservable() {
 
     }
-
-    public static <T extends RealmObject> Observable<T> object(Realm realm, final Func1<Realm, T> function) {
-        return Observable.create(new OnSubscribeRealm<T>(realm) {
+    // TODO context??
+    public static <T extends RealmObject> Observable<T> object(Context context, final Func1<Realm, T> function) {
+        return Observable.create(new OnSubscribeRealm<T>(context) {
             @Override
-            public T get() {
+            public T get(Realm realm) {
                 return function.call(realm);
             }
         });

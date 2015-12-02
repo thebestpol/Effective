@@ -1,5 +1,7 @@
 package es.polgomez.data.repository.datasources.database.observable;
 
+import android.content.Context;
+
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.exceptions.RealmException;
@@ -12,14 +14,15 @@ import rx.subscriptions.Subscriptions;
  */
 public abstract class OnSubscribeRealm<T extends RealmObject> implements Observable.OnSubscribe<T> {
 
-    protected final Realm realm;
+    private final Context context;
 
-    public OnSubscribeRealm(Realm realm) {
-        this.realm = realm;
+    public OnSubscribeRealm(Context context) {
+        this.context = context;
     }
 
     @Override
     public void call(Subscriber<? super T> subscriber) {
+        Realm realm = Realm.getInstance(context);
         subscriber.add(Subscriptions.create(() -> {
             try {
                 realm.close();
@@ -32,7 +35,7 @@ public abstract class OnSubscribeRealm<T extends RealmObject> implements Observa
         realm.beginTransaction();
 
         try {
-            object = get();
+            object = get(realm);
         } catch (RuntimeException e) {
             realm.cancelTransaction();
             subscriber.onError(new RealmException("Error during trasnaction.", e));
@@ -47,5 +50,5 @@ public abstract class OnSubscribeRealm<T extends RealmObject> implements Observa
         subscriber.onCompleted();
     }
 
-    public abstract T get();
+    public abstract T get(Realm realm);
 }

@@ -1,5 +1,7 @@
 package es.polgomez.data.repository.datasources.database;
 
+import android.content.Context;
+
 import es.polgomez.data.entities.PointOfInterestDetailEntity;
 import es.polgomez.data.entities.PointsOfInterestEntity;
 import es.polgomez.data.repository.cache.item.ItemCachePolicy;
@@ -11,19 +13,20 @@ import es.polgomez.data.repository.datasources.database.observable.RealmObservab
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * Implementation of point of interest database source
  */
 public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSource {
-
-    private final Realm realm;
+    // TODO: context??
+    private final Context context;
 
     private ItemCachePolicy<PointOfInterestDetailDataBaseEntity> pointOfInterestDetailCachePolicy;
     private ItemCachePolicy<PointsOfInterestDataBaseEntity> pointsOfInterestCachePolicy;
 
-    public PointOfInterestDataBaseSource(Realm realm) {
-        this.realm = realm;
+    public PointOfInterestDataBaseSource(Context context) {
+        this.context = context;
 
         pointOfInterestDetailCachePolicy = new ItemCachePolicy<>();
         pointsOfInterestCachePolicy = new ItemCachePolicy<>();
@@ -33,14 +36,24 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
     public Observable<PointsOfInterestEntity> obtainPointsOfInterest() {
         PointsOfInterestDataBaseMapper mapper = new PointsOfInterestDataBaseMapper();
 
-        return RealmObservable.object(realm,
-                realmParam -> realmParam.allObjects(PointsOfInterestDataBaseEntity.class).first())
+        return RealmObservable.object(context,
+                realmParam -> {
+                    RealmResults<PointsOfInterestDataBaseEntity> realmResults = realmParam.allObjects(PointsOfInterestDataBaseEntity.class);
+                    if (realmResults.isEmpty()) {
+                        return null;
+                    } else {
+                        return realmResults.first();
+                    }
+
+                })
                 .filter(pointsOfInterestCachePolicy::isValid)
                 .map(mapper::dataToModel);
     }
 
     @Override
     public void persistPointsOfInterest(PointsOfInterestEntity pointsOfInterest) {
+        Realm realm = Realm.getInstance(context);
+
         PointsOfInterestDataBaseMapper mapper = new PointsOfInterestDataBaseMapper();
         PointsOfInterestDataBaseEntity dataBaseEntity = mapper.modelToData(pointsOfInterest);
 
@@ -58,6 +71,7 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
 
     @Override
     public void deletePointsOfInterest() {
+        Realm realm = Realm.getInstance(context);
         RealmResults<PointsOfInterestDataBaseEntity> realmResults =
                 realm.allObjects(PointsOfInterestDataBaseEntity.class);
         if (realmResults != null && !realmResults.isEmpty()) {
@@ -71,7 +85,7 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
     public Observable<PointOfInterestDetailEntity> obtainPointOfInterest(int pointOfInterestId) {
         PointOfInterestDetailDataBaseMapper mapper = new PointOfInterestDetailDataBaseMapper();
 
-        return RealmObservable.object(realm, realmParam ->
+        return RealmObservable.object(context, realmParam ->
                 realmParam.where(PointOfInterestDetailDataBaseEntity.class)
                         .equalTo("id", pointOfInterestId).findFirst())
                 .filter(pointOfInterestDetailCachePolicy::isValid)
@@ -80,6 +94,8 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
 
     @Override
     public void persisPointOfInterest(PointOfInterestDetailEntity pointOfInterest) {
+        Realm realm = Realm.getInstance(context);
+
         PointOfInterestDetailDataBaseMapper mapper = new PointOfInterestDetailDataBaseMapper();
         PointOfInterestDetailDataBaseEntity dataBaseEntity = mapper.modelToData(pointOfInterest);
 
@@ -90,6 +106,8 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
 
     @Override
     public void deletePointOfInterest(PointOfInterestDetailEntity pointOfInterest) {
+        Realm realm = Realm.getInstance(context);
+
         PointOfInterestDetailDataBaseMapper mapper = new PointOfInterestDetailDataBaseMapper();
         PointOfInterestDetailDataBaseEntity dataBaseEntity = mapper.modelToData(pointOfInterest);
 
