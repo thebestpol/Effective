@@ -18,13 +18,11 @@ public interface IPointOfInterestDataBaseSource {
 
     void persistPointsOfInterest(PointsOfInterestEntity pointsOfInterest);
 
-    void deletePointsOfInterest(PointsOfInterestEntity pointsOfInterest);
+    void deletePointsOfInterest();
 
     Observable<PointOfInterestDetailEntity> obtainPointOfInterest(int pointOfInterestId);
 
-    void persisPointOfInterest(PointOfInterestEntity pointOfInterest);
+    void persisPointOfInterest(PointOfInterestDetailEntity pointOfInterest);
 
-    void deletePointOfInterest(PointOfInterestEntity pointOfInterest);
-
-    void persistPointOfInterestDetail(PointOfInterestDetailEntity pointOfInterestDetail);
+    void deletePointOfInterest(PointOfInterestDetailEntity pointOfInterest);
 }

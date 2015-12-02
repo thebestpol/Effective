@@ -28,12 +28,20 @@ public class PointOfInterestDataRepository implements PointOfInterestRepository 
 
     @Override
     public Observable<PointsOfInterest> getPointsOfInterest() {
-        return null;
+        return Observable.concat(
+                dataBaseSource.obtainPointsOfInterest(),
+                networkDataSource.fetchPointsOfInterest().doOnNext(dataPopulate::populatePointsOfInterest)
+        ).map(dataMapper::transformPointsOfInterest)
+                .first(pointsOfInterest -> pointsOfInterest != null);
     }
 
     @Override
     public Observable<PointOfInterestDetail> getPointsOfInterest(int pointId) {
-        return null;
+        return Observable.concat(
+                dataBaseSource.obtainPointOfInterest(pointId),
+                networkDataSource.fetchPointOfInterestDetail(pointId).doOnNext(dataPopulate::populatePointOfInterestDetail)
+        ).map(dataMapper::transformPointOfInterestDetail)
+                .first(pointOfInterestDetail -> pointOfInterestDetail != null);
     }
 
 }
