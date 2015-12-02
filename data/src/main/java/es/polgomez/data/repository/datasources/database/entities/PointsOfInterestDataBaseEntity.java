@@ -6,7 +6,6 @@ import io.realm.annotations.Required;
 
 public class PointsOfInterestDataBaseEntity extends RealmObject {
 
-    @Required
     private RealmList<PointOfInterestDataBaseEntity> pointsOfInterest;
 
     public RealmList<PointOfInterestDataBaseEntity> getPointsOfInterest() {

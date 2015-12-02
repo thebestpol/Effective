@@ -1,5 +1,8 @@
 package es.polgomez.data.repository.datasources.database;
 
+import es.polgomez.data.entities.PointOfInterestDetailEntity;
+import es.polgomez.data.entities.PointOfInterestEntity;
+import es.polgomez.data.entities.PointsOfInterestEntity;
 import es.polgomez.data.repository.cache.item.ItemCachePolicy;
 import es.polgomez.data.repository.cache.list.ListCachePolicy;
 import es.polgomez.data.repository.datasources.exceptions.InvalidCacheException;
@@ -33,51 +36,38 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
         pointsOfInterestListCachePolicy = new ListCachePolicy<>(pointOfInterestCachePolicy);
     }
 
-
     @Override
-    public Observable<PointsOfInterest> obtainPointsOfInterest() throws InvalidCacheException {
-        // TODO
-        PointsOfInterest pointsOfInterest = null;
-        if (pointsOfInterestDetailCachePolicy.isValid(pointsOfInterest)) {
-            return null;
-        } else {
-            throw new InvalidCacheException();
-        }
+    public Observable<PointsOfInterestEntity> obtainPointsOfInterest() {
+        return null;
     }
 
     @Override
-    public void persistPointsOfInterest(PointsOfInterest pointsOfInterest){
+    public void persistPointsOfInterest(PointsOfInterestEntity pointsOfInterest) {
 
     }
 
     @Override
-    public void deletePointsOfInterest(PointsOfInterest pointsOfInterest){
+    public void deletePointsOfInterest(PointsOfInterestEntity pointsOfInterest) {
 
     }
 
     @Override
-    public Observable<PointOfInterestDetail> obtainPointOfInterest(int id) throws InvalidCacheException {
-        // TODO
-        PointOfInterestDetail pointOfInterestDetail = null;
-        if (pointOfInterestDetailCachePolicy.isValid(pointOfInterestDetail)) {
-            return null;
-        } else {
-            throw new InvalidCacheException();
-        }
+    public Observable<PointOfInterestDetailEntity> obtainPointOfInterest(int pointOfInterestId) {
+        return null;
     }
 
     @Override
-    public void persisPointOfInterest(PointOfInterest pointOfInterest){
+    public void persisPointOfInterest(PointOfInterestEntity pointOfInterest) {
 
     }
 
     @Override
-    public void deletePointOfInterest(PointOfInterest pointOfInterest){
+    public void deletePointOfInterest(PointOfInterestEntity pointOfInterest) {
 
     }
 
     @Override
-    public void persistPointOfInterestDetail(PointOfInterestDetail pointOfInterestDetail){
+    public void persistPointOfInterestDetail(PointOfInterestDetailEntity pointOfInterestDetail) {
 
     }
 }

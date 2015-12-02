@@ -8,7 +8,6 @@ public class PointOfInterestDetailDataBaseEntity extends RealmObject {
 
     @PrimaryKey
     private int id;
-    @Required
     private String title;
     private String address;
     private String transport;

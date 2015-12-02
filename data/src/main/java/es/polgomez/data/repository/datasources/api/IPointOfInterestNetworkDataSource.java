@@ -9,10 +9,8 @@ import rx.Observable;
  */
 public interface IPointOfInterestNetworkDataSource {
 
-    // TODO custom exceptions
+    Observable<PointsOfInterestEntity> fetchPointsOfInterest();
 
-    Observable<PointsOfInterestEntity> fetchPointsOfInterest() throws Exception;
-
-    Observable<PointOfInterestDetailEntity> fetchPointOfInterestDetail(int id) throws Exception;
+    Observable<PointOfInterestDetailEntity> fetchPointOfInterestDetail(int id);
 
 }

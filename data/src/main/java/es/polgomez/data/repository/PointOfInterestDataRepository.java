@@ -15,8 +15,6 @@ public class PointOfInterestDataRepository implements PointOfInterestRepository 
     private final PointOfInterestDataBaseSource dataBaseSource;
     private final DataMapper dataMapper;
 
-    // TODO keep working in this way, mapper and repository(factory)
-
     private DataPopulate dataPopulate;
 
     public PointOfInterestDataRepository(PointOfInterestNetworkDataSource networkDataSource,
@@ -30,38 +28,12 @@ public class PointOfInterestDataRepository implements PointOfInterestRepository 
 
     @Override
     public Observable<PointsOfInterest> getPointsOfInterest() {
-        PointsOfInterest pointsOfInterest = new PointsOfInterest();
-        try {
-            // TODO this sould return and observable??
-            pointsOfInterest = dataBaseSource.obtainPointsOfInterest();
-        } catch (InvalidCacheException e) {
-            try {
-                return networkDataSource.fetchPointsOfInterest()
-                        .map(dataMapper::transformPointsOfInterest)
-                        .doOnNext(dataPopulate::populatePointsOfInterest);
-            } catch (Exception exception) {
-                // TODO handle exception
-            }
-        }
-
-        return Observable.just(pointsOfInterest);
+        return null;
     }
 
     @Override
     public Observable<PointOfInterestDetail> getPointsOfInterest(int pointId) {
-        PointOfInterestDetail pointOfInterestDetail = new PointOfInterestDetail();
-        try {
-            pointOfInterestDetail = dataBaseSource.obtainPointOfInterest(pointId);
-        } catch (InvalidCacheException e) {
-            try {
-                return networkDataSource.fetchPointOfInterestDetail(pointId)
-                        .map(dataMapper::transformPointOfInterestDetail)
-                        .doOnNext(dataPopulate::populatePointOfInterestDetail);
-            } catch (Exception exception) {
-                // TODO
-            }
-        }
-        return Observable.just(pointOfInterestDetail);
+        return null;
     }
 
 }
