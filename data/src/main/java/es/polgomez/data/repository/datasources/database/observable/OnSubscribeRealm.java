@@ -25,7 +25,9 @@ public abstract class OnSubscribeRealm<T extends RealmObject> implements Observa
         Realm realm = Realm.getInstance(context);
         subscriber.add(Subscriptions.create(() -> {
             try {
-                realm.close();
+                if (!realm.isClosed()) {
+                    realm.close();
+                }
             } catch (RealmException e) {
                 subscriber.onError(e);
             }
