@@ -57,8 +57,14 @@ public class PointOfInterestDataBaseSource implements IPointOfInterestDataBaseSo
         PointsOfInterestDataBaseMapper mapper = new PointsOfInterestDataBaseMapper();
         PointsOfInterestDataBaseEntity dataBaseEntity = mapper.modelToData(pointsOfInterest);
 
-        PointsOfInterestDataBaseEntity pointsOfInterestDataBase = realm
-                .allObjects(PointsOfInterestDataBaseEntity.class).first();
+        RealmResults<PointsOfInterestDataBaseEntity> realmResults = realm
+                .allObjects(PointsOfInterestDataBaseEntity.class);
+
+        PointsOfInterestDataBaseEntity pointsOfInterestDataBase = null;
+
+        if (!realmResults.isEmpty()) {
+            pointsOfInterestDataBase = realmResults.first();
+        }
 
         realm.beginTransaction();
         if (pointsOfInterestDataBase == null) {
