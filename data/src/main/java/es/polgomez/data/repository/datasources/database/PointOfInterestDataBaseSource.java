@@ -13,7 +13,6 @@ import es.polgomez.data.repository.datasources.database.observable.RealmObservab
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * Implementation of point of interest database source

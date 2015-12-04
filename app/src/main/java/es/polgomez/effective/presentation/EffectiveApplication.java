@@ -13,7 +13,6 @@ import es.polgomez.domain.interactors.pointofinterest.GetPointOfInterestDetail;
 import es.polgomez.domain.interactors.pointofinterest.GetPointsOfInterest;
 import es.polgomez.domain.repository.PointOfInterestRepository;
 import es.polgomez.effective.presentation.navigation.Navigator;
-import io.realm.Realm;
 
 public class EffectiveApplication extends Application {
 

@@ -11,7 +11,6 @@ import es.polgomez.domain.PointsOfInterest;
 import es.polgomez.domain.executor.MainThread;
 import es.polgomez.domain.executor.ThreadExecutor;
 import es.polgomez.domain.interactors.pointofinterest.GetPointOfInterestDetail;
-import es.polgomez.domain.interactors.pointofinterest.GetPointsOfInterest;
 import es.polgomez.domain.repository.PointOfInterestRepository;
 import rx.Observable;
 import rx.observers.TestSubscriber;
