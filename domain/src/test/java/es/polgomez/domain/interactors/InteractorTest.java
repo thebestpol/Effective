@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import es.polgomez.domain.executor.MainThread;
@@ -32,6 +33,14 @@ public class InteractorTest {
                 return Observable.empty();
             }
         };
+    }
+
+    @Test
+    public void testInteractorShouldCreateSubscriptionCorrectly() {
+        TestSubscriber<Object> testSubscriber = TestSubscriber.create();
+        interactor.execute(testSubscriber);
+
+        Mockito.verify(mainThread, Mockito.times(1)).getScheduler();
     }
 
     @Test
