@@ -37,7 +37,8 @@ public class DataMapper {
 
     private PointOfInterest transformPointOfInterest(PointOfInterestEntity pointOfInterestEntity) {
         PointOfInterest pointOfInterest = new PointOfInterest();
-        pointOfInterest.setId(Integer.valueOf(pointOfInterestEntity.getId()));
+        String id = pointOfInterestEntity.getId();
+        pointOfInterest.setId(id != null ? Integer.valueOf(id) : -1);
         pointOfInterest.setTitle(pointOfInterestEntity.getTitle());
 
         return pointOfInterest;
