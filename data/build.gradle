@@ -42,4 +42,8 @@ dependencies {
 
     // Realm
     compile 'io.realm:realm-android:0.85.+'
+
+    testCompile 'junit:junit:4.+'
+    testCompile 'org.mockito:mockito-core:1.+'
+    testCompile "org.robolectric:robolectric:3.+"
 }
