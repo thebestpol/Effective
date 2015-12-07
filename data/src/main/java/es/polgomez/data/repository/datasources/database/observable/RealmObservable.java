@@ -13,7 +13,7 @@ public class RealmObservable {
 
     }
     // TODO context??
-    public static <T extends RealmObject> Observable<T> object(Context context, final Func1<Realm, T> function) {
+    public static <T extends RealmObject> Observable<T> create(Context context, final Func1<Realm, T> function) {
         return Observable.create(new OnSubscribeRealm<T>(context) {
             @Override
             public T get(Realm realm) {
