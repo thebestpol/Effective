@@ -1,7 +1,9 @@
 package es.polgomez.data.repository;
 
 import es.polgomez.data.mapper.DataMapper;
+import es.polgomez.data.repository.datasources.api.IPointOfInterestNetworkDataSource;
 import es.polgomez.data.repository.datasources.api.PointOfInterestNetworkDataSource;
+import es.polgomez.data.repository.datasources.database.IPointOfInterestDataBaseSource;
 import es.polgomez.data.repository.datasources.database.PointOfInterestDataBaseSource;
 import es.polgomez.domain.PointOfInterestDetail;
 import es.polgomez.domain.PointsOfInterest;
@@ -16,10 +18,10 @@ public class PointOfInterestDataRepository implements PointOfInterestRepository 
 
     private DataPopulate dataPopulate;
 
-    public PointOfInterestDataRepository(PointOfInterestNetworkDataSource networkDataSource,
-                                         PointOfInterestDataBaseSource dataBaseSource) {
-        this.networkDataSource = networkDataSource;
-        this.dataBaseSource = dataBaseSource;
+    public PointOfInterestDataRepository(IPointOfInterestNetworkDataSource networkDataSource,
+            IPointOfInterestDataBaseSource dataBaseSource) {
+        this.networkDataSource = (PointOfInterestNetworkDataSource) networkDataSource;
+        this.dataBaseSource = (PointOfInterestDataBaseSource) dataBaseSource;
 
         dataPopulate = new DataPopulate(dataBaseSource);
         dataMapper = new DataMapper();

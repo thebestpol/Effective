@@ -40,4 +40,3 @@ public class PointOfInterestDataBaseSourceTest {
         Assert.assertTrue(true);
     }
 }
-|
