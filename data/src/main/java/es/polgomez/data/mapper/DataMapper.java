@@ -45,14 +45,18 @@ public class DataMapper {
     }
 
     public PointOfInterestDetail transformPointOfInterestDetail(PointOfInterestDetailEntity pointOfInterestDetailEntity) {
-        PointOfInterestDetail pointOfInterestDetail = new PointOfInterestDetail();
-        pointOfInterestDetail.setId(Integer.valueOf(pointOfInterestDetailEntity.getId()));
-        pointOfInterestDetail.setAddress(pointOfInterestDetailEntity.getAddress());
-        pointOfInterestDetail.setDescription(pointOfInterestDetailEntity.getDescription());
-        pointOfInterestDetail.setEmail(pointOfInterestDetailEntity.getEmail());
-        pointOfInterestDetail.setPhone(pointOfInterestDetailEntity.getPhone());
-        pointOfInterestDetail.setTitle(pointOfInterestDetailEntity.getTitle());
-        pointOfInterestDetail.setTransport(pointOfInterestDetailEntity.getTransport());
+        PointOfInterestDetail pointOfInterestDetail = null;
+        if (pointOfInterestDetailEntity != null) {
+            pointOfInterestDetail = new PointOfInterestDetail();
+            String id = pointOfInterestDetailEntity.getId();
+            pointOfInterestDetail.setId(id != null ? Integer.valueOf(id) : -1);
+            pointOfInterestDetail.setAddress(pointOfInterestDetailEntity.getAddress());
+            pointOfInterestDetail.setDescription(pointOfInterestDetailEntity.getDescription());
+            pointOfInterestDetail.setEmail(pointOfInterestDetailEntity.getEmail());
+            pointOfInterestDetail.setPhone(pointOfInterestDetailEntity.getPhone());
+            pointOfInterestDetail.setTitle(pointOfInterestDetailEntity.getTitle());
+            pointOfInterestDetail.setTransport(pointOfInterestDetailEntity.getTransport());
+        }
 
         return pointOfInterestDetail;
     }

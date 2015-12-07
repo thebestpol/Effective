@@ -9,9 +9,11 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.polgomez.data.entities.PointOfInterestDetailEntity;
 import es.polgomez.data.entities.PointOfInterestEntity;
 import es.polgomez.data.entities.PointsOfInterestEntity;
 import es.polgomez.domain.PointOfInterest;
+import es.polgomez.domain.PointOfInterestDetail;
 import es.polgomez.domain.PointsOfInterest;
 
 public class DataMapperTest {
@@ -37,10 +39,10 @@ public class DataMapperTest {
 
     @Test
     public void testTransformPointsInterestWithEmptyListValueShouldNotCrashAndReturnEmpty() {
-        PointsOfInterestEntity pointsOfInterestEntity = new PointsOfInterestEntity();
-        pointsOfInterestEntity.setPointsOfInterest(new ArrayList<>());
+        PointsOfInterestEntity dummyPointsOfInterestEntity = new PointsOfInterestEntity();
+        dummyPointsOfInterestEntity.setPointsOfInterest(new ArrayList<>());
 
-        PointsOfInterest pointsOfInterest = dataMapper.transformPointsOfInterest(pointsOfInterestEntity);
+        PointsOfInterest pointsOfInterest = dataMapper.transformPointsOfInterest(dummyPointsOfInterestEntity);
 
         Assert.assertNotNull(pointsOfInterest);
         Assert.assertNotNull(pointsOfInterest.getPointsOfInterest());
@@ -49,10 +51,10 @@ public class DataMapperTest {
 
     @Test
     public void testTransformPointsInterestWithNullListValueShouldNotCrash() {
-        PointsOfInterestEntity pointsOfInterestEntity = new PointsOfInterestEntity();
-        pointsOfInterestEntity.setPointsOfInterest(null);
+        PointsOfInterestEntity dummyPointsOfInterestEntity = new PointsOfInterestEntity();
+        dummyPointsOfInterestEntity.setPointsOfInterest(null);
 
-        PointsOfInterest pointsOfInterest = dataMapper.transformPointsOfInterest(pointsOfInterestEntity);
+        PointsOfInterest pointsOfInterest = dataMapper.transformPointsOfInterest(dummyPointsOfInterestEntity);
 
         Assert.assertNotNull(pointsOfInterest);
         Assert.assertNull(pointsOfInterest.getPointsOfInterest());
@@ -60,17 +62,16 @@ public class DataMapperTest {
 
     @Test
     public void testTransformPointsOfInterestWithMocksShouldWorkCorrectly() {
-        PointsOfInterestEntity pointsOfInterestEntity = new PointsOfInterestEntity();
-        pointsOfInterestEntity.setPointsOfInterest(createPointsOfInestMock());
+        PointsOfInterestEntity dummyPointsOfInterestEntity = new PointsOfInterestEntity();
+        dummyPointsOfInterestEntity.setPointsOfInterest(createPointsOfInestMock());
 
-        PointsOfInterest pointsOfInterest = dataMapper.transformPointsOfInterest(pointsOfInterestEntity);
+        PointsOfInterest pointsOfInterest = dataMapper.transformPointsOfInterest(dummyPointsOfInterestEntity);
 
         Assert.assertNotNull(pointsOfInterest);
         Assert.assertEquals(MOCK_LIST_SIZE, pointsOfInterest.getPointsOfInterest().size());
-        Assert.assertTrue(pointsOfInterest.getPointsOfInterest().get(0) instanceof PointOfInterest);
-        Assert.assertTrue(pointsOfInterest.getPointsOfInterest().get(1) instanceof PointOfInterest);
-        Assert.assertTrue(pointsOfInterest.getPointsOfInterest().get(3) instanceof PointOfInterest);
-        Assert.assertTrue(pointsOfInterest.getPointsOfInterest().get(3) instanceof PointOfInterest);
+        for (int i = 0; i < MOCK_LIST_SIZE; i++) {
+            Assert.assertTrue(pointsOfInterest.getPointsOfInterest().get(i) instanceof PointOfInterest);
+        }
     }
 
     private List<PointOfInterestEntity> createPointsOfInestMock() {
@@ -95,10 +96,10 @@ public class DataMapperTest {
         List<PointOfInterestEntity> pointOfInterestEntityList = new ArrayList<>();
         pointOfInterestEntityList.add(fakePointOfInterestEntity);
 
-        PointsOfInterestEntity pointsOfInterestEntity = new PointsOfInterestEntity();
-        pointsOfInterestEntity.setPointsOfInterest(pointOfInterestEntityList);
+        PointsOfInterestEntity dummyPointsOfInterestEntity = new PointsOfInterestEntity();
+        dummyPointsOfInterestEntity.setPointsOfInterest(pointOfInterestEntityList);
 
-        PointsOfInterest pointsOfInterest = dataMapper.transformPointsOfInterest(pointsOfInterestEntity);
+        PointsOfInterest pointsOfInterest = dataMapper.transformPointsOfInterest(dummyPointsOfInterestEntity);
 
         Assert.assertNotNull(pointsOfInterest);
         PointOfInterest pointOfInterest = pointsOfInterest.getPointsOfInterest().get(0);
@@ -107,4 +108,21 @@ public class DataMapperTest {
         Assert.assertEquals(FAKE_TITLE, pointOfInterest.getTitle());
     }
 
+
+    @Test
+    public void testTransformPointOfInterestDetailWithNullShouldNotCrash() {
+        PointOfInterestDetail pointOfInterestDetail = dataMapper.transformPointOfInterestDetail(null);
+
+        Assert.assertNull(pointOfInterestDetail);
+    }
+
+    @Test
+    public void testTransformPointOFInterestDetailWithMockShouldTransformCorrectly() {
+        PointOfInterestDetailEntity mockPointOfInterestDetail = Mockito.mock(PointOfInterestDetailEntity.class);
+        PointOfInterestDetail pointOfInterestDetail = dataMapper.transformPointOfInterestDetail(mockPointOfInterestDetail);
+
+        Assert.assertNotNull(pointOfInterestDetail);
+        Assert.assertTrue(pointOfInterestDetail instanceof PointOfInterestDetail);
+    }
 }
+
