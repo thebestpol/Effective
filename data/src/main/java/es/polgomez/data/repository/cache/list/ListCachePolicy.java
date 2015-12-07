@@ -17,7 +17,7 @@ public class ListCachePolicy<T> implements CachePolicy<List<T>> {
 
     @Override
     public boolean isValid(List<T> data) {
-        if (data == null || data.isEmpty()) {
+        if (data == null) {
             return false;
         }
 
