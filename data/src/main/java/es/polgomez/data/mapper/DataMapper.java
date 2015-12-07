@@ -16,14 +16,21 @@ import es.polgomez.domain.PointsOfInterest;
 public class DataMapper {
 
     public PointsOfInterest transformPointsOfInterest(PointsOfInterestEntity pointsOfInterestEntity) {
-        List<PointOfInterest> pointsOfInterestList = new ArrayList<>();
+        PointsOfInterest pointsOfInterest = null;
+        if (pointsOfInterestEntity != null) {
+            List<PointOfInterest> pointsOfInterestList = null;
 
-        PointsOfInterest pointsOfInterest = new PointsOfInterest();
-        for (PointOfInterestEntity pointOfInterestEntity : pointsOfInterestEntity.getPointsOfInterest()) {
-            pointsOfInterestList.add(transformPointOfInterest(pointOfInterestEntity));
+            pointsOfInterest = new PointsOfInterest();
+            List<PointOfInterestEntity> pointsOfInterestEntityList = pointsOfInterestEntity.getPointsOfInterest();
+            if (pointsOfInterestEntityList != null) {
+                pointsOfInterestList = new ArrayList<>();
+                for (PointOfInterestEntity pointOfInterestEntity : pointsOfInterestEntityList) {
+                    pointsOfInterestList.add(transformPointOfInterest(pointOfInterestEntity));
+                }
+            }
+
+            pointsOfInterest.setPointsOfInterest(pointsOfInterestList);
         }
-
-        pointsOfInterest.setPointsOfInterest(pointsOfInterestList);
 
         return pointsOfInterest;
     }
