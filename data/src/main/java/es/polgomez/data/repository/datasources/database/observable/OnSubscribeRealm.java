@@ -23,15 +23,6 @@ public abstract class OnSubscribeRealm<T extends RealmObject> implements Observa
     @Override
     public void call(Subscriber<? super T> subscriber) {
         Realm realm = Realm.getInstance(context);
-        subscriber.add(Subscriptions.create(() -> {
-            try {
-                if (!realm.isClosed()) {
-                    realm.close();
-                }
-            } catch (RealmException e) {
-                subscriber.onError(e);
-            }
-        }));
 
         T object;
         realm.beginTransaction();
@@ -41,15 +32,27 @@ public abstract class OnSubscribeRealm<T extends RealmObject> implements Observa
         } catch (RuntimeException e) {
             realm.cancelTransaction();
             subscriber.onError(new RealmException("Error during trasnaction.", e));
+            if (!realm.isClosed()) {
+                realm.close();
+            }
             return;
         } catch (Error error) {
             realm.cancelTransaction();
             subscriber.onError(error);
+            if (!realm.isClosed()) {
+                realm.close();
+            }
             return;
+        } finally {
+            realm.commitTransaction();
         }
 
         subscriber.onNext(object);
         subscriber.onCompleted();
+
+        if (!realm.isClosed()) {
+            realm.close();
+        }
     }
 
     public abstract T get(Realm realm);
